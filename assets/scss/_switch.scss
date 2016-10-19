@@ -1,0 +1,173 @@
+// variables
+
+$color-toggle: #fff;
+$color-unchecked-static: #aaa;
+$color-unchecked-hover: #777;
+$color-checked-static: #00a000;
+$color-checked-hover: #006e00;
+$color-disabled: #ddd;
+$color-focus: #85bffd;
+
+$switch-width: 3em;
+$switch-height: ($switch-width / 2);     /* 1.5em */
+$toggle-width: ($switch-width / 3);      /* 1em */
+$toggle-gutter: ($switch-width / 12);    /* .25em */
+
+$switch-xl:  1.6em;
+$switch-lg:  1.4em;
+$switch-md: 1.2em;
+$switch-sm: 1em;
+$switch-xs: .8em;
+
+
+// targets the switch container
+
+.switch {
+  position: relative;
+  width: $switch-width;
+  height: $switch-height;
+}
+
+
+// switch size variations
+
+.switch--xl {
+  font-size: $switch-xl;
+}
+
+.switch--lg {
+  font-size: $switch-lg;
+}
+
+.switch--md {
+  font-size: $switch-md;
+}
+
+.switch--sm {
+  font-size: $switch-sm;
+}
+
+.switch--xs {
+  font-size: $switch-xs;
+}
+
+
+// targets the switch__control - the checkbox or radio button input
+
+.switch__control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $switch-width;
+  height: $switch-height;
+  border-radius: $switch-height;
+  margin: 0;
+  opacity: 0;
+  line-height: 1;
+}
+
+
+// targets the switch__label
+
+.switch__label {
+  position: relative;
+  display: block;
+  width: $switch-width;
+  height: $switch-height;
+  border-radius: $switch-height;
+  margin: 0;
+  cursor: pointer;
+  background: $color-unchecked-static;
+  text-indent: 0;
+  transition: background .2s;
+}
+
+
+// targets the switch label to create the circle toggle using a pseudo element
+
+.switch__label:after {
+  position: absolute;
+  top: $toggle-gutter;
+  left: $toggle-gutter;
+  display: block;
+  width: $toggle-width;
+  height: $toggle-width;
+  border-radius: $toggle-width;
+  content: '';
+  background: $color-toggle;
+  transition: left .04s;
+}
+
+
+// targets the switch label when the control is in HOVER
+
+.switch__control:hover + label,
+.switch__control:focus + label {
+  background: $color-unchecked-hover;
+}
+
+
+// targets the switch label when the control is CHECKED
+
+.switch__control:checked + label {
+  background: $color-checked-static;
+}
+
+
+// targets the switch label when the control is CHECKED and in HOVER
+
+.switch__control:checked:hover + label,
+.switch__control:checked:focus + label {
+  background: $color-checked-hover;
+}
+
+
+// targets the switch label when the control is CHECKED and in FOCUS
+
+.switch__control:focus + label,
+.switch__control:checked:focus + label {
+  box-shadow:
+    0 0 0 1px $color-focus,
+    0 0 0 2px $color-focus,
+    0 0 5px 3px $color-focus;
+}
+
+
+// targets the switch label when the control is CHECKED, to move the toggle to the right
+
+.switch__control:checked + label:after {
+  left: $switch-height + $toggle-gutter;
+}
+
+
+// targets the switch label when control is CHECKED to add the background-image icon
+
+.switch__control:checked + label:before {
+  position: absolute;
+  z-index: 10;
+  top: $toggle-gutter;
+  left: $toggle-gutter * 1.3;
+  display: block;
+  width: $toggle-width;
+  height: $toggle-width;
+  content: '';
+  background-image: url(../img/switch.svg);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 100%;
+}
+
+
+// stargets the witch label when the control is DISABLED
+
+.switch__control[disabled] + label {
+  cursor: not-allowed;
+  background: $color-disabled;
+}
+
+
+// targets the switch__content to hide it off screen
+
+.switch__content {
+  @extend %hidden;
+}
